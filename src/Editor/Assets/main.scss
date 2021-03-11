@@ -1,0 +1,24 @@
+@import './pallette.scss';
+
+// Set your brand colors
+// $purple: #8A4D76;
+// $pink: #FA7C91;
+// $brown: #757763;
+// $beige-light: #D0D1CD;
+// $beige-lighter: #EFF0EB;
+
+$cyan: #0abde3;
+$red: #ee5253;
+$orange: #ff9f43;
+$pink: #f368e0;
+$green: #10ac84;
+$dark-grey: #222f3e;
+$light-grey: #576574;
+$white-grey: #c8d6e5;
+
+// $body-background-color: $dark-grey;
+
+
+@import '~bulma/bulma';
+@import '../../../node_modules/@creativebulma/bulma-tooltip/src/sass/index.sass';
+
