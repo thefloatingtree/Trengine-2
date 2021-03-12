@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="level">
+        <div class="level is-mobile mb-0 my-3">
             <div class="level-left pointer" @click="onClick">
                 <div class="level-item">
                     <div class="icon">
@@ -42,12 +42,9 @@ export default {
 
 <style lang="scss" scoped>
 .child {
-    padding-left: 3em;
+    padding-left: 2.35rem;
 }
-.level {
-    margin-bottom: 0;
-}
-.level-right {
-    margin-right: 1em;
+.level-left:hover {
+    cursor: pointer;
 }
 </style>

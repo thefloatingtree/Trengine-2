@@ -1,3 +1,4 @@
+import { Moving } from "./Moving";
 import { BaseRenderer } from "./Renderers/BaseRenderer";
 import { SpriteRenderer } from "./Renderers/SpriteRenderer";
 import { SpriteUpdater } from "./SpriteUpdater";
@@ -8,4 +9,5 @@ export function registerDefaultSystems(ECS) {
     ECS.registerSystem(BaseRenderer)
     ECS.registerSystem(SpriteRenderer)
     ECS.registerSystem(SpriteUpdater)
+    ECS.registerSystem(Moving)
 }

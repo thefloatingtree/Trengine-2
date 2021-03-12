@@ -1,7 +1,9 @@
 <template>
     <editor-container>
         <editor-nav-bar></editor-nav-bar>
-        <scene v-if="showScene"></scene>
+        <keep-alive>    
+            <scene v-if="showScene"></scene>
+        </keep-alive>
     </editor-container>
 </template>
 

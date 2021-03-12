@@ -12,6 +12,12 @@ export class Entity {
         Array.from(this.components.values()).forEach(component => component.init())
     }
 
+    addComponentWithConstructor(Component) {
+        this.components.set(Component.name, new Component())
+        this.componentTypes.push(Component.name)
+        return this
+    }
+
     addComponent(component) {
         this.components.set(component.className(), component)
         this.componentTypes.push(component.className())
@@ -31,13 +37,25 @@ export class Entity {
         return this
     }
 
+    removeComponentByInstance(component) {
+        this.removeComponent(component.constructor)
+    }
+
     serialize() {
         const components = Array.from(this.components.values()).map(component => component.serialize())
         return new EntityData({ components, id: this.id })
     }
 
+    getComponents() {
+        return Array.from(this.components.values())
+    }
+
     getComponent(Component) {
         return this.components.get(Component.name)
+    }
+
+    getComponentByInstance(component) {
+        return this.components.get(component.className())
     }
 
     hasComponent(Component) {

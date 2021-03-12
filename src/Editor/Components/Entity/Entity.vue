@@ -1,11 +1,21 @@
 <template>
-    <div class="level mr-3 is-mobile">
+    <div @click="onClick()" class="level mr-3 is-mobile">
         <div class="level-left">
             <div class="level-item">
                 <p>{{ entity.id }}</p>
             </div>
         </div>
         <div class="level-right">
+            <div class="level-item">
+                <button
+                    class="button is-dark is-inverted has-tooltip-arrow has-tooltip-bottom is-pulled-right"
+                    data-tooltip="Edit Entity Name"
+                >
+                    <span class="icon">
+                        <font-awesome-icon icon="edit" />
+                    </span>
+                </button>
+            </div>
             <div class="level-item">
                 <button
                     class="button is-dark is-inverted has-tooltip-arrow has-tooltip-bottom is-pulled-right"
@@ -18,6 +28,7 @@
             </div>
             <div class="level-item">
                 <button
+                    @click="onDelete()"
                     class="button is-dark is-inverted has-tooltip-arrow has-tooltip-bottom is-pulled-right"
                     data-tooltip="Delete Entity"
                 >
@@ -31,8 +42,18 @@
 </template>
 
 <script>
+import { Treditor } from "../../Treditor";
 export default {
     props: ["entity"],
+    methods: {
+        onDelete() {
+            Treditor.ECS.scene.removeEntity(this.entity);
+            this.$store.commit("updateScene", Treditor.ECS.scene);
+        },
+        onClick() {
+            this.$emit("click", this.entity);
+        },
+    },
 };
 </script>
 

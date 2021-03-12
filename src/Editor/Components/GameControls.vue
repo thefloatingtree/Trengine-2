@@ -3,7 +3,7 @@
         <p class="control">
             <button
                 @click="onPlay()"
-                class="button is-primary is-inverted has-tooltip-arrow has-tooltip-bottom"
+                class="button is-dark is-inverted has-tooltip-arrow has-tooltip-bottom"
                 data-tooltip="Play Scene"
                 :disabled="!playEnabled"
             >
@@ -27,7 +27,7 @@
         <p class="control">
             <button
                 @click="onStop()"
-                class="button is-danger is-inverted has-tooltip-arrow has-tooltip-bottom"
+                class="button is-dark is-inverted has-tooltip-arrow has-tooltip-bottom"
                 data-tooltip="Stop Scene"
                 :disabled="!stopEnabled"
             >
@@ -50,8 +50,8 @@ export default {
             return !this.paused && this.engineStarted;
         },
         stopEnabled() {
-            return this.engineStarted
-        }
+            return this.engineStarted;
+        },
     },
     data() {
         return {
@@ -62,19 +62,27 @@ export default {
     methods: {
         onPlay() {
             if (this.paused) {
-                Treditor.play();
+                try {
+                    Treditor.play();
+                } catch {}
+                this.paused = false;
             } else {
                 this.$store.commit("hideEditor");
-                Treditor.startEngine();
+                try {
+                    Treditor.startEngine();
+                } catch {}
                 this.engineStarted = true;
+                this.paused = false;
             }
-            this.paused = false;
         },
         onStop() {
             if (!this.engineStarted) return;
 
             this.$store.commit("showEditor");
-            Treditor.stop();
+
+            try {
+                Treditor.stop();
+            } catch {}
 
             this.engineStarted = false;
             this.paused = false;
@@ -82,7 +90,9 @@ export default {
         onPause() {
             if (!this.engineStarted) return;
 
-            Treditor.pause();
+            try {
+                Treditor.pause();
+            } catch {}
 
             this.paused = true;
         },

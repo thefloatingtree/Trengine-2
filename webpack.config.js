@@ -12,6 +12,7 @@ module.exports = {
     mode: (production ? "production" : "none"),
     target: "electron-renderer",
     entry: (production ? gameEntry : editorEntry),
+    // entry: gameEntry,
     output: {
         path: __dirname,
         filename: "bundle.js",

@@ -28,7 +28,13 @@ class Engine {
         return this._deltaTimer.get()
     }
 
-    async start({ manifestPath = "", loadDefaultBundle = true, defaultBundleName = "default", onStart = async () => { }, registerSystems = () => {}, registerComponents = () => {} } = {}) {
+    async start({
+        manifestPath = "", 
+        loadDefaultBundle = true, 
+        defaultBundleName = "default", 
+        onStart = async () => {}, 
+        registerSystems = () => {}, 
+        registerComponents = () => {} } = {}) {
     
         this._deltaTimer = new DeltaTimer()
 

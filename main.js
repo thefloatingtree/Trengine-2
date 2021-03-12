@@ -1,9 +1,9 @@
 const { app, BrowserWindow } = require('electron')
-// const debug = require('electron-debug')
+const debug = require('electron-debug')
 
 function createWindow() {
 
-    // debug({ showDevTools: false })
+    debug({ showDevTools: false })
     // if (process.env.NODE_ENV !== 'production') {
     // }
 

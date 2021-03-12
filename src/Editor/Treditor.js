@@ -51,4 +51,4 @@ class Editor {
     }
 }
 
-export const Treditor = Object.freeze(new Editor())
+export const Treditor = new Editor()

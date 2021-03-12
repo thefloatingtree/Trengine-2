@@ -75,6 +75,10 @@ export class Scene {
         return this
     }
 
+    getEntityById(id) {
+        return this.entities.find(entity => entity.id === id)
+    }
+
     addSingletonComponent(Component, initialState = {}) {
         // Only one instance can exist in the singleton entity
         if (this.singletonComponents.hasComponent(Component)) return

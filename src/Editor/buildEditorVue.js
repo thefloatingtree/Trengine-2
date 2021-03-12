@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 import Editor from './Editor'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faAngleDown, faAngleRight, faClone, faCog, faEdit, faFolderOpen, faPause, faPlay, faPlus, faSave, faSearch, faStop, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { faAngleDown, faAngleRight, faCheckSquare, faClone, faCog, faEdit, faFolderOpen, faPause, faPlay, faPlus, faSave, faSearch, faSquare, faStop, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { Treditor } from './Treditor'
 
@@ -11,8 +11,23 @@ export function buildEditorVue() {
 
     require('./assets/main.scss')
 
-    
-    library.add(faPlay, faPause, faStop, faSave, faClone, faFolderOpen, faEdit, faPlus, faCog, faSearch, faAngleDown, faAngleRight, faTrash)
+    library.add(
+        faPlay,
+        faPause,
+        faStop,
+        faSave,
+        faClone,
+        faFolderOpen,
+        faEdit,
+        faPlus,
+        faCog,
+        faSearch,
+        faAngleDown,
+        faAngleRight,
+        faTrash,
+        faSquare,
+        faCheckSquare
+    )
     Vue.component('font-awesome-icon', FontAwesomeIcon)
 
     Vue.use(Vuex)
@@ -20,7 +35,8 @@ export function buildEditorVue() {
     const store = new Vuex.Store({
         state: {
             scene: Treditor.ECS.scene,
-            hideEditor: false
+            hideEditor: false,
+            eventBus: new Vue()
         },
         mutations: {
             updateScene(state, updatedScene) {

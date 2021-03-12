@@ -56,6 +56,7 @@ export default {
         createScene() {
             const scene = Treditor.ECS.loadEmptyScene()
             this.$store.commit('updateScene', scene)
+            this.$store.state.eventBus.$emit('createScene', scene)
         },
         async openScene() {
             const { filePaths, canceled } = await remote.dialog.showOpenDialog({ properties: ["openFile"] })
@@ -64,6 +65,7 @@ export default {
             const sceneData = JSON.parse(rawData)
             const scene = await Treditor.ECS.loadScene(sceneData)
             this.$store.commit('updateScene', scene)
+            this.$store.state.eventBus.$emit('loadScene', scene)
         },
         async saveScene() {
 

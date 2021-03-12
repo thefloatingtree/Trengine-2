@@ -3,7 +3,7 @@ import { ComponentData } from "../Engine/ECS/Persistence/ComponentData"
 import { Trengine } from "../Engine/Trengine"
 
 export class Sprite extends Component {
-    constructor({ textureName, scale = 1, rotation = 0 } = {}) {
+    constructor({ textureName = "", scale = 1, rotation = 0 } = {}) {
         super()
         this.textureName = textureName
         this.scale = scale

@@ -21,12 +21,21 @@ export class ECS {
         return Component
     }
 
+    getRegisteredComponents() {
+        return Array.from(this.components.values())
+    }
+
     registerSystem(System) {
         this.systems.set(System.name, System)
         return System
     }
+    
+    getRegisteredSystems() {
+        return Array.from(this.systems.values())
+    }
 
     async loadScene(sceneData) {
+        console.log(sceneData)
         this.scene = new SceneData(sceneData).getScene(this.systems, this.components)
         if (!this.frozen) await this.scene.init()
         
@@ -49,6 +58,6 @@ export class ECS {
     }
 
     update() {
-        if (this.scene || !this.frozen) this.scene.update()
+        if (this.scene && !this.frozen) this.scene.update()
     }
 }

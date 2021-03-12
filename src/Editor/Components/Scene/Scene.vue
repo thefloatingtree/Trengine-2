@@ -2,19 +2,19 @@
     <div>
         <scene-nav-bar></scene-nav-bar>
 
-        <div class="columns">
+        <div class="columns is-mobile">
             <div class="column">
                 <tabs @onTabSelect="onMainTabSelect($event)">
                     <tab title="Entities">
-                        <entity-list></entity-list>
+                        <entity-list @entitySelected="onEntitySelect($event)"></entity-list>
                     </tab>
                     <tab title="Systems"></tab>
                     <tab title="Singletons"></tab>
                     <tab title="Bundles"></tab>
                 </tabs>
             </div>
-            <div class="column">
-                <component :is="rightColumnComponent"></component>
+            <div v-if="rightColumnComponent !== 'empty'" class="column">
+                <component :subject="rightColumnSubject" :is="rightColumnComponent"></component>
             </div>
         </div>
     </div>
@@ -38,12 +38,20 @@ export default {
         SystemSettings,
         Empty,
     },
+    mounted () {
+        this.$store.state.eventBus.$on('createScene', () => {
+            this.onEntitySelect(null)
+        });
+    },
     computed: {
+        rightColumnSubject() {
+            return this.subjectLUT[this.selectedMainTabTitle];
+        },
         rightColumnComponent() {
             return {
                 Entities: "entity-settings",
                 Systems: "system-settings",
-                Singetons: "empty",
+                Singletons: "empty",
                 Bundles: "empty",
             }[this.selectedMainTabTitle];
         },
@@ -51,12 +59,21 @@ export default {
     data() {
         return {
             selectedMainTabTitle: "Entities",
+            subjectLUT: {
+                Entities: null,
+                Systems: null,
+                Singletons: null,
+                Bundles: null,
+            }
         };
     },
     methods: {
         onMainTabSelect(tabTitle) {
             this.selectedMainTabTitle = tabTitle;
         },
+        onEntitySelect(entity) {
+            this.subjectLUT = { ...this.subjectLUT, Entities: entity }
+        }
     },
 };
 </script>
