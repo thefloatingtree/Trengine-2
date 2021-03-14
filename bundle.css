@@ -1,3 +1,27 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  overflow: hidden !important; }
+
+canvas {
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  width: 100vw;
+  height: 100vh; }
+
+.level[data-v-d6734de2] {
+  border-radius: 4px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: lightgrey;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  box-shadow: 0 0.0625em 0.125em rgba(10, 10, 10, 0.05);
+}
+.level[data-v-d6734de2]:hover {
+    border-color: grey;
+    cursor: pointer;
+}
+
 .level[data-v-43bd89ef] {
   border-radius: 4px;
   border-style: solid;
@@ -31,6 +55,41 @@
 
 label[data-v-2b95196e] {
   user-select: none;
+}
+
+.wrapper[data-v-2fad3165] {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 70vh;
+}
+.selected[data-v-2fad3165] {
+  border-style: solid;
+  border-width: 1px;
+  border-color: black;
+}
+
+.level[data-v-3ca44722] {
+  border-radius: 4px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: lightgrey;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  box-shadow: 0 0.0625em 0.125em rgba(10, 10, 10, 0.05);
+}
+.level[data-v-3ca44722]:hover {
+    border-color: grey;
+    cursor: pointer;
+}
+
+.wrapper[data-v-40a2a2a6] {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 70vh;
+}
+.selected[data-v-40a2a2a6] {
+  border-style: solid;
+  border-width: 1px;
+  border-color: black;
 }
 
 .background[data-v-b3adaf7c] {

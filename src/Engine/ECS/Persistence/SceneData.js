@@ -15,6 +15,8 @@ export class SceneData {
         const scene = new Scene({ id: this.id, singletonId: this.singletonComponents.id })
         scene.bundles = this.bundles
 
+        scene.singletonComponents = new EntityData(this.singletonComponents).getEntity(componentMap)
+
         this.systems.forEach(systemData => {
             const System = new SystemData(systemData).getSystem(systemMap)
             scene.addSystem(System)

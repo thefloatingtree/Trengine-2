@@ -8,12 +8,18 @@
                     <tab title="Entities">
                         <entity-list @entitySelected="onEntitySelect($event)"></entity-list>
                     </tab>
-                    <tab title="Systems"></tab>
-                    <tab title="Singletons"></tab>
-                    <tab title="Bundles"></tab>
+                    <tab title="Systems">
+                        <system-list @systemSelected="onSystemSelect($event)"></system-list>
+                    </tab>
+                    <tab title="Singletons">
+                        <singleton-list></singleton-list>
+                    </tab>
+                    <tab title="Bundles">
+                        <bundle-list></bundle-list>
+                    </tab>
                 </tabs>
             </div>
-            <div v-if="rightColumnComponent !== 'empty'" class="column">
+            <div class="column">
                 <component :subject="rightColumnSubject" :is="rightColumnComponent"></component>
             </div>
         </div>
@@ -21,22 +27,32 @@
 </template>
 
 <script>
+import BundleList from '../Bundle/BundleList.vue';
+import BundleSettings from '../Bundle/BundleSettings.vue';
 import Empty from '../Common/Empty.vue';
 import Tab from "../Common/Tab.vue";
 import Tabs from "../Common/Tabs.vue";
 import EntityList from "../Entity/EntityList.vue";
 import EntitySettings from "../Entity/EntitySettings.vue";
+import SingletonList from '../Singleton/SingletonList.vue';
+import SingletonSettings from '../Singleton/SingletonSettings.vue';
+import SystemList from '../System/SystemList.vue';
 import SystemSettings from "../System/SystemSettings.vue";
 import SceneNavBar from "./SceneNavBar.vue";
 export default {
     components: {
         SceneNavBar,
         EntityList,
+        SystemList,
         Tabs,
         Tab,
         EntitySettings,
         SystemSettings,
         Empty,
+        BundleSettings,
+        BundleList,
+        SingletonList,
+        SingletonSettings,
     },
     mounted () {
         this.$store.state.eventBus.$on('createScene', () => {
@@ -51,8 +67,8 @@ export default {
             return {
                 Entities: "entity-settings",
                 Systems: "system-settings",
-                Singletons: "empty",
-                Bundles: "empty",
+                Singletons: "singleton-settings",
+                Bundles: "bundle-settings",
             }[this.selectedMainTabTitle];
         },
     },
@@ -73,6 +89,9 @@ export default {
         },
         onEntitySelect(entity) {
             this.subjectLUT = { ...this.subjectLUT, Entities: entity }
+        },
+        onSystemSelect(system) {
+            this.subjectLUT = { ...this.subjectLUT, Systems: system }
         }
     },
 };

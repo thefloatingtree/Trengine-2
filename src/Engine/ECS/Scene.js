@@ -47,6 +47,10 @@ export class Scene {
         })
     }
 
+    hasSystem(System) {
+        return this.systems.some(system => system instanceof System)
+    }
+
     addQuery(name, ComponentArray) {
         if (name === "singleton") throw new Error("singleton is a reserved query")
         this.queries[name] = new Query(name, ComponentArray)
@@ -76,6 +80,7 @@ export class Scene {
     }
 
     getEntityById(id) {
+        if (id == this.singletonComponents.id) return this.singletonComponents
         return this.entities.find(entity => entity.id === id)
     }
 
@@ -85,6 +90,18 @@ export class Scene {
         this.singletonComponents.addComponent(Component, initialState)
 
         return this
+    }
+
+    addBundle(bundle) {
+        if (!this.hasBundle(bundle)) this.bundles.push(bundle)
+    }
+
+    removeBundle(bundle) {
+        this.bundles = this.bundles.filter(b => b !== bundle)
+    }
+
+    hasBundle(bundle) {
+        return this.bundles.includes(bundle)
     }
 
     _updateQueries() {

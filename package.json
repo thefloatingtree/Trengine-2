@@ -22,6 +22,7 @@
     "electron-debug": "^3.2.0",
     "electron-squirrel-startup": "^1.0.0",
     "howler": "^2.2.1",
+    "three": "^0.126.1",
     "vue": "^2.6.12",
     "vuex": "^3.6.2"
   },

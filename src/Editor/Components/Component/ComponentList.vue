@@ -6,7 +6,6 @@
                     <modal>
                         <button
                             slot="trigger"
-                            @click="onAddComponent()"
                             class="button is-primary"
                         >
                             <span>Add Component</span>
@@ -46,7 +45,6 @@ export default {
     props: ["components", "entity"],
     components: { ComponentView, Modal, RegisteredComponentsList },
     methods: {
-        onAddComponent() {},
         onPropertyChange({ component, property }) {
             Treditor.ECS.scene
                 .getEntityById(this.entity.id)

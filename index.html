@@ -3,24 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'"> -->
     <title>Trengine</title>
     <link rel="stylesheet" href="bundle.css">
-    <style>
-        body,
-        html {
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-        }
-        canvas {
-            image-rendering: pixelated;
-            image-rendering: crisp-edges;
-            width: 100vw;
-            height: 100vh;
-        }
-    </style>
 </head>
 <body>
+    <canvas id="canvas-3d"></canvas>
     <canvas id="canvas-2d"></canvas>
     <script src="./bundle.js"></script>
 </body>

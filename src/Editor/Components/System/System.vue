@@ -2,30 +2,10 @@
     <div @click="onClick()" class="level mr-3 is-mobile">
         <div class="level-left">
             <div class="level-item">
-                <p>{{ entity.id }}</p>
+                <p>{{ systemName }}</p>
             </div>
         </div>
         <div class="level-right">
-            <div class="level-item">
-                <button
-                    class="button is-dark is-inverted has-tooltip-arrow has-tooltip-bottom is-pulled-right"
-                    data-tooltip="Edit Entity Name"
-                >
-                    <span class="icon">
-                        <font-awesome-icon icon="edit" />
-                    </span>
-                </button>
-            </div>
-            <div class="level-item">
-                <button
-                    class="button is-dark is-inverted has-tooltip-arrow has-tooltip-bottom is-pulled-right"
-                    data-tooltip="Duplicate Entity"
-                >
-                    <span class="icon">
-                        <font-awesome-icon icon="clone" />
-                    </span>
-                </button>
-            </div>
             <div class="level-item">
                 <button
                     @click="onDelete()"
@@ -44,15 +24,19 @@
 <script>
 import { Treditor } from "../../Treditor";
 export default {
-    props: ["entity"],
+    props: ["system"],
+    computed: {
+        systemName() {
+            return this.system.constructor.name 
+        }
+    },
     methods: {
         onDelete() {
-            Treditor.ECS.scene.removeEntity(this.entity);
-            this.$store.state.eventBus.$emit('deleteEntity', this.entity)
-            this.$store.commit("updateScene", Treditor.ECS.scene);
+            Treditor.ECS.scene.removeSystem(this.system.constructor)
+            this.$store.commit('updateScene', Treditor.ECS.scene)
         },
         onClick() {
-            this.$emit("click", this.entity);
+            this.$emit("click", this.system);
         },
     },
 };

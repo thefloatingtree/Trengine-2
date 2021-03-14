@@ -35,7 +35,6 @@ export class ECS {
     }
 
     async loadScene(sceneData) {
-        console.log(sceneData)
         this.scene = new SceneData(sceneData).getScene(this.systems, this.components)
         if (!this.frozen) await this.scene.init()
         

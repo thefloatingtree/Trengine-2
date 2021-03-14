@@ -9,6 +9,8 @@ import { SoundManager } from "./SoundManager";
 import { UIManager } from './UIManager';
 import { DeltaTimer } from "./Util/DeltaTimer";
 
+require('./Assets/main.scss')
+
 class Engine {
     constructor() {
         this._deltaTimer
