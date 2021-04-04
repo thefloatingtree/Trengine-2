@@ -1,4 +1,4 @@
-import { Component } from "../Engine/ECS/Component"
+import { Component } from "../../Engine/ECS/Component"
 
 export class Velocity extends Component {
     constructor({ vx = 0, vy = 0 } = {}) {

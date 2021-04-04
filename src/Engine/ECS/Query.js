@@ -1,9 +1,10 @@
 export class Query {
-    constructor(name, ComponentArray) {
+    constructor(name, ComponentArray, options) {
         this.name = name
         this.components = ComponentArray
         this.firstOrDefault = null
         this.entities = []
+        this.options = options
     }
 
     forEach(callback) {
@@ -13,6 +14,10 @@ export class Query {
     }
 
     match(entity) {
-        return entity.hasAllComponents(this.components)
+        if (this.options.some) {
+            return entity.hasSomeComponents(this.components)
+        } else {
+            return entity.hasAllComponents(this.components)
+        }
     }
 }

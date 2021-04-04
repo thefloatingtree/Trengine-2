@@ -22,7 +22,9 @@ class Editor {
             onStart: async () => {
                 const sceneData = this.ECS.serializeScene()
                 await Trengine.ECS.loadScene(sceneData)
-            }
+            },
+            registerSystems,
+            registerComponents
         })
     }
 
@@ -39,7 +41,6 @@ class Editor {
     }
 
     start() {
-
         registerDefaultComponents(this.ECS)
         registerDefaultSystems(this.ECS)
 

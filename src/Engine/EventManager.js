@@ -2,6 +2,7 @@ class Event {
     constructor() {
         this.waitingToSee = 0
         this.haveSeen = 0
+        this.subscribers = []
         this.payloads = []
     }
 }
@@ -18,6 +19,7 @@ export class EventManager {
             event.haveSeen = 0
             event.payloads = []
         }
+        event.subscribers.forEach(subscriber => subscriber(payload))
         event.payloads.push(payload)
     }
 
@@ -50,6 +52,11 @@ export class EventManager {
         if (event.waitingToSee === event.haveSeen) return []
         event.haveSeen++
         return event.payloads
+    }
+
+    subscribe(eventType, callback) {
+        let event = this.events.get(eventType)
+        event.subscribers.push(callback)
     }
 
     _insureEventTypeExists(eventType) {

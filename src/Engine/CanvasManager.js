@@ -10,7 +10,6 @@ export class CanvasManager {
     reset2DContext() {
         // Hacky, but clears the canvas
         this.context2D.canvas.width = this.context2D.canvas.width
-        this.context3D.clear()
     }
 
     get2DContext() {
@@ -18,7 +17,7 @@ export class CanvasManager {
     }
 
     reset3DContext() {
-        
+        this.context3D.clear()
     }
 
     get3DContext() {

@@ -1,6 +1,7 @@
-import { Component } from "../Engine/ECS/Component"
-import { ComponentData } from "../Engine/ECS/Persistence/ComponentData"
-import { Trengine } from "../Engine/Trengine"
+
+import { Component } from "../../Engine/ECS/Component"
+import { ComponentData } from "../../Engine/ECS/Persistence/ComponentData"
+import { Trengine } from "../../Engine/Trengine"
 
 export class Sprite extends Component {
     constructor({ textureName = "", scale = 1, rotation = 0 } = {}) {

@@ -4,7 +4,8 @@ export function mountVue(vue, id = "app") {
     const wrapper = document.createElement('div')
     wrapper.id = id
     wrapper.style.position = "absolute"
-    // wrapper.style.width = "100vw"
+    wrapper.style.width = "100vw"
+    wrapper.style.height = "100vh"
     document.body.insertBefore(wrapper, document.body.firstChild)
 
     const root = document.createElement('div')

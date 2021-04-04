@@ -1,5 +1,5 @@
-import { Position } from '../../Components/Position'
-import { Sprite } from '../../Components/Sprite'
+import { Position } from '../../Components/Two/Position'
+import { Sprite } from '../../Components/Two/Sprite'
 import { System } from '../../Engine/ECS/System'
 import { Trengine } from '../../Engine/Trengine'
 

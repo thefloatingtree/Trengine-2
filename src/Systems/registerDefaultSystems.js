@@ -1,3 +1,4 @@
+import { MatterUpdater } from "./Matter/MatterUpdater";
 import { Moving } from "./Moving";
 import { BaseRenderer } from "./Renderers/BaseRenderer";
 import { SpriteRenderer } from "./Renderers/SpriteRenderer";
@@ -12,4 +13,5 @@ export function registerDefaultSystems(ECS) {
     ECS.registerSystem(SpriteUpdater)
     ECS.registerSystem(ThreeRenderer)
     ECS.registerSystem(Moving)
+    ECS.registerSystem(MatterUpdater)
 }

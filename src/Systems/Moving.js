@@ -1,5 +1,5 @@
-import { Position } from '../Components/Position'
-import { Velocity } from '../Components/Velocity'
+import { Position } from '../Components/Two/Position'
+import { Velocity } from '../Components/Two/Velocity'
 import { System } from '../Engine/ECS/System'
 
 export class Moving extends System {

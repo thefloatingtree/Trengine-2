@@ -4,8 +4,9 @@ import { uuidv4 } from '../Util/Util'
 import { Trengine } from '../Trengine'
 
 export class Scene {
-    constructor({ id = uuidv4(), singletonId = uuidv4() } = {}) {
+    constructor({ ecs, id = uuidv4(), singletonId = uuidv4() } = {}) {
         this.id = id
+        this.ecs = ecs
         this.systems = []
         this.entities = []
         this.bundles = []
@@ -22,6 +23,7 @@ export class Scene {
     async init() {
         const tasks = this.bundles.map(bundleName => Trengine.Assets.loadBundle(bundleName))
         await Promise.all(tasks)
+        this.singletonComponents.init()
         this.systems.forEach(system => {
             if (system.init) system.init(this)
         })
@@ -29,6 +31,16 @@ export class Scene {
             entity.init()
         })
         this._updateQueries()
+    }
+
+    dispose() {
+        this.singletonComponents.dispose()
+        this.entities.forEach(entity => {
+            entity.dispose()
+        })
+        this.systems.forEach(system => {
+            if (system.dispose) system.dispose()
+        })
     }
 
     addSystem(System) {
@@ -51,9 +63,9 @@ export class Scene {
         return this.systems.some(system => system instanceof System)
     }
 
-    addQuery(name, ComponentArray) {
+    addQuery(name, ComponentArray, some = false) {
         if (name === "singleton") throw new Error("singleton is a reserved query")
-        this.queries[name] = new Query(name, ComponentArray)
+        this.queries[name] = new Query(name, ComponentArray, { some })
 
         this._updateQueries()
 
@@ -62,7 +74,9 @@ export class Scene {
 
     addEntity(entity) {
         this.entities.push(entity)
-
+        if (!this.ecs.frozen) {
+            entity.init()
+        }
         this._updateQueries()
     }
 

@@ -12,5 +12,7 @@ export class System {
 
     update() {}
 
+    dispose() {}
+
     serialize() { return new SystemData({ systemType: this.className() }) }
 }

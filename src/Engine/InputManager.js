@@ -40,10 +40,13 @@ export class InputManager {
                 switch (binding.type) {
                     case RELEASED:
                         output |= this.pinput.isReleased(binding.keys)
+                        break
                     case PRESSED:
                         output |= this.pinput.isPressed(binding.keys)
+                        break
                     case DOWN:
                         output |= this.pinput.isDown(binding.keys)
+                        break
                 }
             }
         }

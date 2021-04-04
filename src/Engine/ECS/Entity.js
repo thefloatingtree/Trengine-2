@@ -6,10 +6,19 @@ export class Entity {
         this.id = id
         this.components = new Map()
         this.componentTypes = []
+        this.didInit = false
     }
 
     init() {
+        if (this.didInit) return
         Array.from(this.components.values()).forEach(component => component.init())
+        this.didInit = true
+    }
+
+    dispose() {
+        this.getComponents().forEach(component => {
+            component.dispose()
+        })
     }
 
     addComponentWithConstructor(Component) {
@@ -30,7 +39,11 @@ export class Entity {
     }
 
     removeComponent(Component) {
-        if (typeof Component.prototype.dispose == "function") this.components.get(Component.name).dispose()
+        try {
+            if (typeof Component.prototype.dispose == "function") this.components.get(Component.name).dispose()
+        } catch (e) {
+            console.warn("Error calling dispose on " + Component.name + " from entity " + this.id)
+        }
         this.components.delete(Component.name)
         this.componentTypes.splice(this.componentTypes.indexOf(Component.name), 1)
 
@@ -50,6 +63,17 @@ export class Entity {
         return Array.from(this.components.values())
     }
 
+    getComponentsFromComponentList(ComponentList) {
+        const result = []
+        ComponentList.forEach(Component => {
+            const component = this.components.get(Component.name)
+            if (component) {
+                result.push(component)
+            }
+        })
+        return result
+    }
+
     getComponent(Component) {
         return this.components.get(Component.name)
     }
@@ -60,6 +84,14 @@ export class Entity {
 
     hasComponent(Component) {
         return !!~this.componentTypes.indexOf(Component.name) // !!~ turns result of indexOf into a boolean
+    }
+
+    hasSomeComponents(componentList) {
+        let result = false
+        componentList.forEach(Component => {
+            result = result || this.hasComponent(Component)
+        })
+        return result
     }
 
     hasAllComponents(componentList) {

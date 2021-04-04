@@ -59,7 +59,8 @@ module.exports = {
         }),
         new MiniCssExtractPlugin({
             filename: 'bundle.css'
-        })
+        }),
+        new webpack.ProvidePlugin({ 'window.decomp': 'poly-decomp' })
     ],
     watch: true,
 }

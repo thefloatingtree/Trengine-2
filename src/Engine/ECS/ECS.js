@@ -1,3 +1,4 @@
+import { Trengine } from "../Trengine"
 import { Entity } from "./Entity"
 import { SceneData } from "./Persistence/SceneData"
 import { Scene } from "./Scene"
@@ -35,7 +36,13 @@ export class ECS {
     }
 
     async loadScene(sceneData) {
-        this.scene = new SceneData(sceneData).getScene(this.systems, this.components)
+        if (this.scene) {
+            this.scene.dispose()
+            this.scene = null
+            Trengine.onSceneLoad()
+        }
+
+        this.scene = new SceneData(sceneData).getScene(this.systems, this.components, this)
         if (!this.frozen) await this.scene.init()
         
         return this.scene

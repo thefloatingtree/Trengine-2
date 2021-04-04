@@ -11,8 +11,8 @@ export class SceneData {
         this.systems = systems
     }
 
-    getScene(systemMap, componentMap) {
-        const scene = new Scene({ id: this.id, singletonId: this.singletonComponents.id })
+    getScene(systemMap, componentMap, ecs) {
+        const scene = new Scene({ ecs, id: this.id, singletonId: this.singletonComponents.id })
         scene.bundles = this.bundles
 
         scene.singletonComponents = new EntityData(this.singletonComponents).getEntity(componentMap)
