@@ -49,7 +49,7 @@ export class ECS {
     }
 
     loadEmptyScene() {
-        this.scene = new Scene()
+        this.scene = new Scene({ ecs: this })
         return this.scene
     }
 

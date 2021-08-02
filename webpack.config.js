@@ -14,7 +14,7 @@ module.exports = {
     entry: (production ? gameEntry : editorEntry),
     // entry: gameEntry,
     output: {
-        path: __dirname,
+        path: __dirname + "/build",
         filename: "bundle.js",
         globalObject: "this",
     },

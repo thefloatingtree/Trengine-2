@@ -4,6 +4,7 @@
   "description": "Rewrite of Trengine",
   "main": "main.js",
   "scripts": {
+    "init": "node ./src/Utility/generate.js && npm install",
     "start": "npm-run-all -p start:electron start:dev",
     "start:electron": "electron-forge start",
     "start:dev": "webpack",
