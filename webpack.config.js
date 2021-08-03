@@ -1,9 +1,11 @@
+require('dotenv').config()
+
 const { VueLoaderPlugin } = require('vue-loader')
 const webpack = require('webpack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin')
 
-const production = false
+const production = process.env.PRODUCTION === "true"
 
 const editorEntry = "./src/Editor/main.js"
 const gameEntry = "../Game/main.js"

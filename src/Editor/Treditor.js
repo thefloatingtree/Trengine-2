@@ -18,7 +18,7 @@ class Editor {
 
     startEngine() {
         this.EngineInstanceManager.makeInstance({ 
-            manifestPath: "../Game/Assets/manifest.json",
+            manifestPath: "../../Game/Assets/manifest.json",
             onStart: async () => {
                 const sceneData = this.ECS.serializeScene()
                 await Trengine.ECS.loadScene(sceneData)

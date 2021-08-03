@@ -1,25 +1,28 @@
 const { app, BrowserWindow } = require('electron')
 const debug = require('electron-debug')
 
+require('dotenv').config()
+
 function createWindow() {
-
     debug({ showDevTools: false })
-    // if (process.env.NODE_ENV !== 'production') {
-    // }
-
+    
     const win = new BrowserWindow({
-        width: 900,
-        height: 600,
+        width: 1280,
+        height: 720,
         webPreferences: {
             nodeIntegration: true,
             enableRemoteModule: true
         }
     })
 
-    win.webContents.openDevTools();
+    if (process.env.PRODUCTION === "true") {
+        win.setResizable(false)
+    } else {    
+        win.webContents.openDevTools();
+    }
 
     win.setMenu(null)
-    win.loadFile('./index.html')
+    win.loadFile('./src/index.html')
 }
 
 app.whenReady().then(createWindow)

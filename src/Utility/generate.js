@@ -21,8 +21,7 @@ fs.mkdirSync('../Game/UI/Scenes')
 
 // Make files
 
-fs.writeFileSync('../Game/main.js', `
-import { Trengine } from '../Trengine-2/src/Engine/Trengine'
+fs.writeFileSync('../Game/main.js', `import { Trengine } from '../Trengine-2/src/Engine/Trengine'
 import { registerSystems } from './Systems/registerSystems'
 import { registerComponents } from './Components/registerComponents'
  
@@ -34,23 +33,17 @@ Trengine.start({
     },
     registerSystems,
     registerComponents
-})
-`)
+})`)
 
-fs.writeFileSync('../Game/Components/registerComponents.js', `
-export function registerComponents(ECS) {
+fs.writeFileSync('../Game/Components/registerComponents.js', `export function registerComponents(ECS) {
 
-}
-`)
+}`)
 
-fs.writeFileSync('../Game/Systems/registerSystems.js', `
-export function registerSystems(ECS) {
+fs.writeFileSync('../Game/Systems/registerSystems.js', `export function registerSystems(ECS) {
 
-}
-`)
+}`)
 
-fs.writeFileSync('../Game/Assets/manifest.json', `
-{
+fs.writeFileSync('../Game/Assets/manifest.json', `{
     "imagePath": "image/",
     "soundPath": "sound/",
     "dataPath": "data/",
@@ -60,11 +53,9 @@ fs.writeFileSync('../Game/Assets/manifest.json', `
 
         ]
     }
-}
-`)
+}`)
 
-fs.writeFileSync('../package.json', `
-{
+fs.writeFileSync('../package.json', `{
     "name": "computer-graphics-final",
     "version": "1.0.0",
     "description": "",
@@ -74,11 +65,10 @@ fs.writeFileSync('../package.json', `
     },
     "author": "",
     "license": "ISC"
-}
-`)
+}`)
 
-fs.writeFileSync('../Game/Assets/data/scene.level.json', `
-{"id":"f2f8da24-f3ce-4b7e-9e16-dfe13c69434c","bundles":[],"singletonComponents":{"components":[],"id":"e93bfc00-9c3d-41b0-bb62-faf71c4f5ed4"},"entities":[],"systems":[]}
-`)
+fs.writeFileSync('../Game/Assets/data/scene.level.json', `{"id":"f2f8da24-f3ce-4b7e-9e16-dfe13c69434c","bundles":[],"singletonComponents":{"components":[],"id":"e93bfc00-9c3d-41b0-bb62-faf71c4f5ed4"},"entities":[],"systems":[]}`)
+
+fs.writeFileSync('./.env', `PRODUCTION=false`)
 
 console.log("Installing dependencies...")

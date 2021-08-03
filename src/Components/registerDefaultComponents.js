@@ -10,16 +10,11 @@ import { ThreeDirectionalLight } from "./Three/ThreeDirectionalLight"
 import { ThreeFog } from "./Three/ThreeFog"
 import { ThreePointLight } from "./Three/ThreePointLight"
 import { ThreeSpriteMesh } from "./Three/ThreeSpriteMesh"
-import { Position } from "./Two/Position"
-import { Velocity } from "./Two/Velocity"
 
 
 export function registerDefaultComponents(ECS) {
-    // Two
-    ECS.registerComponent(Position)
-    ECS.registerComponent(Velocity)
-    ECS.registerComponent(Sprite)
     // Three
+    ECS.registerComponent(Sprite)
     ECS.registerComponent(SingletonThreeCamera)
     ECS.registerComponent(SingletonThreeOrthoCamera)
     ECS.registerComponent(SingletonThreeScene)
