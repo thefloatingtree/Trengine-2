@@ -1,6 +1,11 @@
 import { Sprite } from "three"
+import { MatterBodies } from "./Matter/MatterBodies"
 import { MatterBody } from "./Matter/MatterBody"
+import { MatterBodyPixiDebug } from "./Matter/MatterBodyPixiDebug"
 import { SingletonMatterEngine } from "./Matter/SingletonMatterEngine"
+import { PixiSprite } from "./Pixi/PixiSprite"
+import { SingletonPixiContainer } from "./Pixi/SingletonPixiContainer"
+import { SingletonPixiRenderer } from "./Pixi/SingletonPixiRenderer"
 import { SingletonThreeCamera } from "./Three/SingletonThreeCamera"
 import { SingletonThreeOrthoCamera } from "./Three/SingletonThreeOrthoCamera"
 import { SingletonThreeScene } from "./Three/SingletonThreeScene"
@@ -27,4 +32,10 @@ export function registerDefaultComponents(ECS) {
     // Matter
     ECS.registerComponent(SingletonMatterEngine)
     ECS.registerComponent(MatterBody)
+    ECS.registerComponent(MatterBodies)
+    ECS.registerComponent(MatterBodyPixiDebug)
+    // Pixi
+    ECS.registerComponent(PixiSprite)
+    ECS.registerComponent(SingletonPixiContainer)
+    ECS.registerComponent(SingletonPixiRenderer)
 }

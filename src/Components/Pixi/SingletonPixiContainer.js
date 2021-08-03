@@ -1,11 +1,13 @@
-import { Scene } from "three"
 import { Component } from "../../Engine/ECS/Component"
 import { ComponentData } from "../../Engine/ECS/Persistence/ComponentData"
+import { Trengine } from "../../Engine/Trengine"
+import { Container } from 'pixi.js' 
 
-export class SingletonThreeScene extends Component {
+
+export class SingletonPixiContainer extends Component {
     constructor() {
         super()
-        this.scene
+        this.container
     }
 
     serialize() {
@@ -16,6 +18,10 @@ export class SingletonThreeScene extends Component {
     }
 
     init() {
-        this.scene = new Scene()
+        this.container = new Container()
+    }
+    
+    dispose() {
+
     }
 }

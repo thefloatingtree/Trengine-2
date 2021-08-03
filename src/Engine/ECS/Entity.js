@@ -21,8 +21,10 @@ export class Entity {
         })
     }
 
-    addComponentWithConstructor(Component) {
-        this.components.set(Component.name, new Component())
+    addComponentWithConstructor(Component, props = {}) {
+        const component = new Component(props)
+        component.entityId = this.id
+        this.components.set(Component.name, component)
         this.componentTypes.push(Component.name)
         return this
     }

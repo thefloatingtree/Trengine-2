@@ -7,8 +7,8 @@ function createWindow() {
     debug({ showDevTools: false })
     
     const win = new BrowserWindow({
-        width: 1280,
-        height: 720,
+        width: 1296,
+        height: 759,
         webPreferences: {
             nodeIntegration: true,
             enableRemoteModule: true

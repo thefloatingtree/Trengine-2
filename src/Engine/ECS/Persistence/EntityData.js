@@ -11,7 +11,9 @@ export class EntityData {
         const components = this.components.map(componentRawData => {
             const componentData = new ComponentData(componentRawData)
             const Component = componentData.getComponent(componentMap)
-            return new Component(componentData.data)
+            const component = new Component(componentData.data)
+            component.entityId = this.id
+            return component
         })
 
         return new Entity({ id: this.id }).addComponents(components)

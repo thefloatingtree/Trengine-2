@@ -93,8 +93,7 @@ class Engine {
 
     _onStop() {
         this.ECS.scene.dispose()
-        this.Canvas.reset2DContext()
-        this.Canvas.reset3DContext()
+        this.Canvas.cleanupCanvases()
     }
 
     _run() {

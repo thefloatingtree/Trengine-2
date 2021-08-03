@@ -10,19 +10,19 @@ const AssetType = Object.freeze({
     Data: 2
 })
 
-// export function loadImage(src) {
-//     return new Promise(resolve => {
-//         let img = document.createElement('img')
-//         img.addEventListener('load', () => { resolve(img) }, false)
-//         img.src = src
-//     })
-// }
-
 export function loadImage(src) {
     return new Promise(resolve => {
-      new TextureLoader().load(src, resolve);
-    });
-  }
+        let img = document.createElement('img')
+        img.addEventListener('load', () => { resolve(img) }, false)
+        img.src = src
+    })
+}
+
+// export function loadImage(src) {
+//     return new Promise(resolve => {
+//       new TextureLoader().load(src, resolve);
+//     });
+//   }
 
 export class AssetManager {
     constructor() {

@@ -1,7 +1,10 @@
+import { uuidv4 } from "../Util/Util"
 import { ComponentData } from "./Persistence/ComponentData"
 
 export class Component {
-    constructor() {}
+    constructor(entityId) {
+        this.entityId = entityId
+    }
     
     init() {}
     

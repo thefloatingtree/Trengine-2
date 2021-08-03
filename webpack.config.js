@@ -4,6 +4,7 @@ const { VueLoaderPlugin } = require('vue-loader')
 const webpack = require('webpack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin')
+const path = require('path');
 
 const production = process.env.PRODUCTION === "true"
 
@@ -21,7 +22,11 @@ module.exports = {
         globalObject: "this",
     },
     resolve: {
-        extensions: ['.vue', '.js']
+        extensions: ['.vue', '.js'],
+        modules: [
+            path.resolve(__dirname, 'node_modules'),
+            'node_modules'
+        ]
     },
     optimization: {
         minimize: production,

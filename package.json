@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "Rewrite of Trengine",
   "main": "./src/main.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/thefloatingtree/Trengine-2.git"
+  },
   "scripts": {
     "init": "node ./src/Utility/generate.js && npm install",
     "start": "npm-run-all -p start:electron start:dev",
@@ -25,6 +29,7 @@
     "electron-squirrel-startup": "^1.0.0",
     "howler": "^2.2.1",
     "matter-js": "^0.16.1",
+    "pixi.js": "^6.1.0",
     "poly-decomp": "^0.3.0",
     "three": "^0.126.1",
     "vue": "^2.6.12",
@@ -36,7 +41,6 @@
     "@electron-forge/maker-rpm": "^6.0.0-beta.54",
     "@electron-forge/maker-squirrel": "^6.0.0-beta.54",
     "@electron-forge/maker-zip": "^6.0.0-beta.54",
-    "@rollup/plugin-replace": "^2.4.1",
     "@vue/compiler-sfc": "^3.0.7",
     "css-loader": "^5.1.1",
     "electron": "^11.2.3",
