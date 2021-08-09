@@ -33,7 +33,7 @@ export class MatterPixiUpdater extends System {
 
         this.queries.MatterBodyAndPixiSprite.forEach(entity => {
             const { body, isSensor } = entity.getComponent(MatterBody)
-            const { sprite } = entity.getComponent(PixiSprite)
+            const { sprite } = entity.getComponent(PixiSprite) 
 
             // If the body is a sensor and attatched to a sprite, make it follow the sprite instead of leading the sprite
             if (isSensor) {
@@ -48,8 +48,8 @@ export class MatterPixiUpdater extends System {
             const { body } = entity.getComponent(MatterBodies)
             const { sprite } = entity.getComponent(PixiSprite)
             
-            sprite.x = body.position.x / this.scale
-            sprite.y = body.position.y / this.scale
+            sprite.x = Math.floor(body.position.x / this.scale)
+            sprite.y = Math.floor(body.position.y / this.scale)
         })
 
         Engine.update(this.engine, Trengine.delta() * (1000 / 60))

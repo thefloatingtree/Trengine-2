@@ -1,9 +1,7 @@
-import { Body } from 'matter-js';
 import { MatterBodies } from '../../Components/Matter/MatterBodies';
 import { MatterBody } from '../../Components/Matter/MatterBody';
 import { MatterBodyPixiDebug } from '../../Components/Matter/MatterBodyPixiDebug';
 import { SingletonMatterEngine } from '../../Components/Matter/SingletonMatterEngine';
-import { PixiSprite } from '../../Components/Pixi/PixiSprite';
 import { SingletonPixiContainer } from '../../Components/Pixi/SingletonPixiContainer';
 import { SingletonPixiRenderer } from '../../Components/Pixi/SingletonPixiRenderer';
 import { convertHexString } from '../../Components/Three/util';
@@ -13,13 +11,21 @@ import { Trengine } from '../../Engine/Trengine'
 export class PixiRenderer extends System {
 
     init() {
-        this.renderer = this.scene.singletonComponents.getComponent(SingletonPixiRenderer).renderer
+        this.rendererComponent = this.scene.singletonComponents.getComponent(SingletonPixiRenderer)
+        this.renderer = this.rendererComponent.renderer
+
+        this.renderTexture = this.rendererComponent.renderTexture
+        this.renderScale = this.rendererComponent.renderScale
+        this.viewportSprite = this.rendererComponent.viewportSprite
+        this.viewportContainer = this.rendererComponent.viewportContainer
+        this.camera = this.rendererComponent.camera
+
         this.container = this.scene.singletonComponents.getComponent(SingletonPixiContainer).container
 
         try {
-            this.scale = this.scene.singletonComponents.getComponent(SingletonMatterEngine).scale
+            this.matterScale = this.scene.singletonComponents.getComponent(SingletonMatterEngine).scale
         } catch {
-            this.scale = 1
+            this.matterScale = 1
         }
 
         this.scene.addQuery('DebugMatterBody', [MatterBodyPixiDebug, MatterBody])
@@ -42,14 +48,15 @@ export class PixiRenderer extends System {
             })
         }
 
+        // Draw debug graphics
         this.scene.queries.DebugMatterBody.forEach(entity => {
             const { graphics, lineColor } = entity.getComponent(MatterBodyPixiDebug)
             const { body } = entity.getComponent(MatterBody)
 
             const verts = body.vertices.map(vertex => {
                 return {
-                    x: vertex.x / this.scale,
-                    y: vertex.y / this.scale
+                    x: vertex.x / this.matterScale,
+                    y: vertex.y / this.matterScale
                 }
             })
 
@@ -72,8 +79,8 @@ export class PixiRenderer extends System {
             body.parts.forEach(part => {
                 const verts = part.vertices.map(vertex => {
                     return {
-                        x: vertex.x / this.scale,
-                        y: vertex.y / this.scale
+                        x: vertex.x / this.matterScale,
+                        y: vertex.y / this.matterScale
                     }
                 })
 
@@ -87,7 +94,21 @@ export class PixiRenderer extends System {
             })
         })
 
-        this.renderer.render(this.container)
+        // zoom and anchor
+        let beforeScaleWidth = this.viewportSprite.width
+        let beforeScaleHeight = this.viewportSprite.height
+        this.viewportSprite.scale.x = this.renderScale + this.camera.zoom
+        this.viewportSprite.scale.y = this.renderScale + this.camera.zoom
+        this.viewportSprite.x += (beforeScaleWidth - this.viewportSprite.width) * this.camera.anchor.x
+        this.viewportSprite.y += (beforeScaleHeight - this.viewportSprite.height) * this.camera.anchor.y
+        // camera position
+        this.container.x = Math.floor(-this.camera.x / this.renderScale)
+        this.container.y = Math.floor(-this.camera.y / this.renderScale)
+        // render texture
+        this.renderer.render(this.container, { renderTexture: this.renderTexture })
+        this.viewportSprite.texture = this.renderTexture
+        // render
+        this.renderer.render(this.viewportContainer)
     }
 
     dispose() {

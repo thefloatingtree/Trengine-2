@@ -1,6 +1,5 @@
 import { Component } from "../../Engine/ECS/Component"
 import { ComponentData } from "../../Engine/ECS/Persistence/ComponentData"
-import { Trengine } from "../../Engine/Trengine"
 import { Container } from 'pixi.js' 
 
 
