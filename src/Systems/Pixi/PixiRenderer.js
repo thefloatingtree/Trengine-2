@@ -1,6 +1,7 @@
 import { MatterBodies } from '../../Components/Matter/MatterBodies';
 import { MatterBody } from '../../Components/Matter/MatterBody';
 import { MatterBodyPixiDebug } from '../../Components/Matter/MatterBodyPixiDebug';
+import { MatterTilemap } from '../../Components/Matter/MatterTilemap';
 import { SingletonMatterEngine } from '../../Components/Matter/SingletonMatterEngine';
 import { SingletonPixiContainer } from '../../Components/Pixi/SingletonPixiContainer';
 import { SingletonPixiRenderer } from '../../Components/Pixi/SingletonPixiRenderer';
@@ -30,6 +31,7 @@ export class PixiRenderer extends System {
 
         this.scene.addQuery('DebugMatterBody', [MatterBodyPixiDebug, MatterBody])
         this.scene.addQuery('DebugMatterBodies', [MatterBodyPixiDebug, MatterBodies])
+        this.scene.addQuery('DebugMatterTilemaps', [MatterBodyPixiDebug, MatterTilemap])
 
         Trengine.Events.registerMany(['PixiDrawableAdded', 'PixiDrawableRemoved'])
     }
@@ -78,6 +80,30 @@ export class PixiRenderer extends System {
 
             body.parts.forEach(part => {
                 const verts = part.vertices.map(vertex => {
+                    return {
+                        x: vertex.x / this.matterScale,
+                        y: vertex.y / this.matterScale
+                    }
+                })
+
+                graphics.lineStyle(1, convertHexString(lineColor), 1, 0)
+                graphics.moveTo(verts[0].x, verts[0].y)
+                for (let i = 1; i < verts.length; i++) {
+                    graphics.lineTo(verts[i].x, verts[i].y)
+                }
+                graphics.lineTo(verts[0].x, verts[0].y)
+                graphics.closePath()
+            })
+        })
+
+        this.scene.queries.DebugMatterTilemaps.forEach(entity => {
+            const { graphics, lineColor } = entity.getComponent(MatterBodyPixiDebug)
+            const { bodies } = entity.getComponent(MatterTilemap)
+
+            graphics.clear()
+
+            bodies.forEach(body => {
+                const verts = body.vertices.map(vertex => {
                     return {
                         x: vertex.x / this.matterScale,
                         y: vertex.y / this.matterScale
